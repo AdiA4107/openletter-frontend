@@ -140,6 +140,52 @@ function MainNav({ setShowHowTo, setShowHistory, setShowGetInvolved }: { setShow
   );
 }
 
+// --- Custom Thank You Modal ---
+function ThankYouModal({ open, onClose }: { open: boolean, onClose: () => void }) {
+  if (!open) return null;
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      background: 'rgba(0,0,0,0.4)',
+      zIndex: 1000,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <div style={{
+        background: '#800000', // UChicago maroon
+        color: '#fff',
+        borderRadius: 16,
+        padding: '40px 32px 32px 32px',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+        maxWidth: 400,
+        textAlign: 'center',
+        position: 'relative',
+      }}>
+        <h2 style={{ fontWeight: 800, fontSize: 26, marginBottom: 16 }}>Thank You for Using Your Voice!</h2>
+        <p style={{ fontSize: 18, marginBottom: 24 }}>
+          Your Open Letter has been submitted to Voice for Change.<br />We appreciate your commitment to making a difference.
+        </p>
+        <button onClick={onClose} style={{
+          background: '#fff',
+          color: '#800000',
+          border: 'none',
+          borderRadius: 8,
+          fontWeight: 700,
+          fontSize: 16,
+          padding: '10px 24px',
+          cursor: 'pointer',
+          marginTop: 8,
+        }}>Close</button>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [showHistory, setShowHistory] = useState(false);
   const [showHowTo, setShowHowTo] = useState(false);
@@ -153,6 +199,7 @@ function App() {
     content: "",
     email: ""
   });
+  const [thankYouOpen, setThankYouOpen] = useState(false);
 
   // Handle form changes
   const handleChange = (
@@ -177,7 +224,7 @@ function App() {
       '63WjLbmftoOjaUu9U' // Public Key
     ).then(
       (result) => {
-        alert('Thank you for submitting your open letter!');
+        setThankYouOpen(true);
         setLettersSubmitted([{ ...form }, ...lettersSubmitted]);
         setForm({ name: '', recipient: '', content: '', email: '' });
       },
@@ -394,22 +441,29 @@ function App() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
       <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
+      <ThankYouModal open={thankYouOpen} onClose={() => setThankYouOpen(false)} />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
-          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 12, color: "#fff" }}>
+          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 24, color: "#fff", textAlign: 'center' }}>
             Voice for Change: A platform where our voices can shape a better world.
           </h1>
-          <p style={{ fontSize: 20, color: "#fff", marginBottom: 24 }}>
-            Open Letters have been utilised since the Ancient Greeks to draw the public's attention to key issues of the time. Ever since, these letters have been a driving force in representing the people's voice, a true pinnacle of democracy.
-            <br /><br />
-            Open Letters are intended to be a letter from an ordinary citizen of the state to any high-ranking government individual, influential public figure, or anybody in a position of power or authority. Although written by only one person, they represent the collective voice of the community that the person speaks on behalf of, including regional communities, economic groups, students, and marginalised communities, as well as victims of injustice.
-            <br /><br />
-            At its heart, the goal of an Open Letter is to draw public attention. It is a powerful reminder of the state operating "for the people", underscoring the effectiveness, both positively and negatively, of government policies and actions. By harnessing public opinion, they are an insurmountable force for change, based on the premise of ultimate accountability of all leaders to their people.
-            <br /><br />
-            This platform provides you with guidelines on how to choose what you write an Open Letter on, whom you write it to, and how you should go about the entire process. To supplement this, you can refer to Open Letters that have been extremely impactful in the change they have brought about - from Martin Luther King Jr. in the backdrop of the Civil Rights Movement, to Albert Einstein's warning issued to the US Government on the Axis Powers developing the Atomic Bomb. As a result, hopefully, each of you will leave this page more confident in your ability to use your voice for causes that matter to you.
-            <br /><br />
-            Today, this is more important than ever. It is important to remind ourselves that our voice matters, and by utilising it effectively, we can bring change. From Education Policy to Rural Development, Voice For Change aspires to use this platform to communicate received Open Letters with relevant MLAs, MPs, and Members of State and Union Governments, or other relevant individuals, and it begins with your own voice. By sending in letters and engaging with policymakers, each of you plays a role in transforming the community and society around you. Get involved now.
-          </p>
+          <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+              Open Letters have been utilised since the Ancient Greeks to draw the public's attention to key issues of the time. Ever since, these letters have been a driving force in representing the people's voice, a true pinnacle of democracy.
+            </p>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+              Open Letters are intended to be a letter from an ordinary citizen of the state to any high-ranking government individual, influential public figure, or anybody in a position of power or authority. Although written by only one person, they represent the collective voice of the community that the person speaks on behalf of, including regional communities, economic groups, students, and marginalised communities, as well as victims of injustice.
+            </p>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+              At its heart, the goal of an Open Letter is to draw public attention. It is a powerful reminder of the state operating "for the people", underscoring the effectiveness, both positively and negatively, of government policies and actions. By harnessing public opinion, they are an insurmountable force for change, based on the premise of ultimate accountability of all leaders to their people.
+            </p>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+              This platform provides you with guidelines on how to choose what you write an Open Letter on, whom you write it to, and how you should go about the entire process. To supplement this, you can refer to Open Letters that have been extremely impactful in the change they have brought about - from Martin Luther King Jr. in the backdrop of the Civil Rights Movement, to Albert Einstein's warning issued to the US Government on the Axis Powers developing the Atomic Bomb. As a result, hopefully, each of you will leave this page more confident in your ability to use your voice for causes that matter to you.
+            </p>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+              Today, this is more important than ever. It is important to remind ourselves that our voice matters, and by utilising it effectively, we can bring change. From Education Policy to Rural Development, Voice For Change aspires to use this platform to communicate received Open Letters with relevant MLAs, MPs, and Members of State and Union Governments, or other relevant individuals, and it begins with your own voice. By sending in letters and engaging with policymakers, each of you plays a role in transforming the community and society around you. Get involved now.
+            </p>
+          </div>
         </section>
         <section id="howto" style={{ marginBottom: 40 }}>
           {/* How to Write an Open Letter section remains as before */}
@@ -419,11 +473,11 @@ function App() {
           <div style={{ color: "#fff", fontSize: 18, marginBottom: 24 }}>
             <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
             <p style={{ marginBottom: 12 }}>
-              After you submit your open letter following our guidelines, Voice for Change will actively work to connect you with the relevant policymaker, leader, or influential individual who can help bring about the change you seek. We are committed to championing student voices and ensuring your message reaches those in a position to make a difference.
+              After you submit your open letter, according to our guidelines, Voice for Change will actively work to connect you with the relevant policymaker, leader, or any other relevant influential individual who can help bring about the change you sought out with your Open Letter. We are committed to championing student voices and ensuring your message reaches those who are in a position to make a difference.
             </p>
             <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>Why Get Involved?</h3>
             <p>
-              By participating in Voice for Change, you benefit from our established credibility and history of meaningful engagement with policymakers. We leverage our experience and networks to amplify your voice, making sure it is not only heard, but also considered by those who can enact real change.
+              By participating in Voice for Change, you can benefit from our credibility from our past engagement with policymakers. We aspire to leverage our network to amplify your voice, ensuring each of us can enact real change.
             </p>
           </div>
           <p style={{ color: "#fff", fontSize: 18, marginBottom: 16 }}>
