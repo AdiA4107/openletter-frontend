@@ -186,6 +186,50 @@ function ThankYouModal({ open, onClose }: { open: boolean, onClose: () => void }
   );
 }
 
+// --- Footer Component ---
+function Footer() {
+  return (
+    <footer style={{
+      background: "#800000",
+      color: "#fff",
+      padding: "40px 0",
+      marginTop: 64,
+      textAlign: "center"
+    }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+        <h3 style={{ fontSize: 24, fontWeight: 600, marginBottom: 16 }}>Contact Us</h3>
+        <p style={{ fontSize: 18, marginBottom: 8 }}>
+          Have questions or suggestions? We'd love to hear from you!
+        </p>
+        <a 
+          href="mailto:leadership@openletter.co.in"
+          style={{
+            color: "#fff",
+            textDecoration: "none",
+            fontSize: 18,
+            fontWeight: 500,
+            display: "inline-block",
+            padding: "8px 16px",
+            border: "2px solid #fff",
+            borderRadius: 8,
+            transition: "all 0.2s ease"
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = "#fff";
+            e.currentTarget.style.color = "#800000";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#fff";
+          }}
+        >
+          leadership@openletter.co.in
+        </a>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
   const [showHistory, setShowHistory] = useState(false);
   const [showHowTo, setShowHowTo] = useState(false);
@@ -199,7 +243,7 @@ function App() {
     content: "",
     email: ""
   });
-  const [thankYouOpen, setThankYouOpen] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   // Handle form changes
   const handleChange = (
@@ -224,7 +268,7 @@ function App() {
       '63WjLbmftoOjaUu9U' // Public Key
     ).then(
       (result) => {
-        setThankYouOpen(true);
+        setShowThankYou(true);
         setLettersSubmitted([{ ...form }, ...lettersSubmitted]);
         setForm({ name: '', recipient: '', content: '', email: '' });
       },
@@ -441,7 +485,6 @@ function App() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
       <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
-      <ThankYouModal open={thankYouOpen} onClose={() => setThankYouOpen(false)} />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
           <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 24, color: "#fff", textAlign: 'center' }}>
@@ -523,6 +566,8 @@ function App() {
           </form>
         </section>
       </main>
+      <Footer />
+      <ThankYouModal open={showThankYou} onClose={() => setShowThankYou(false)} />
     </div>
   );
 }
