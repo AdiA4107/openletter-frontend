@@ -257,7 +257,7 @@ function App() {
     e.preventDefault();
 
     emailjs.send(
-      'service_th3mprc', // Service ID
+      'service_u8lrg7k', // Service ID (Outlook)
       'template_b9xez9s', // Template ID
       {
         from_name: form.name,
