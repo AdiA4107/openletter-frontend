@@ -106,11 +106,12 @@ function LetterAvatar({ image, author }: { image: string; author: string }) {
 }
 
 // --- Shared Navigation ---
-function MainNav({ setShowHowTo, setShowHistory, setShowGetInvolved }: { setShowHowTo: (b: boolean) => void, setShowHistory: (b: boolean) => void, setShowGetInvolved: (b: boolean) => void }) {
+function MainNav({ setShowHowTo, setShowHistory, setShowGetInvolved, setShowDashboard }: { setShowHowTo: (b: boolean) => void, setShowHistory: (b: boolean) => void, setShowGetInvolved: (b: boolean) => void, setShowDashboard: (b: boolean) => void }) {
   const handleNav = (target: string) => {
     setShowHowTo(false);
     setShowHistory(false);
     setShowGetInvolved(false);
+    setShowDashboard(false);
     setTimeout(() => {
       const el = document.getElementById(target);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -119,21 +120,24 @@ function MainNav({ setShowHowTo, setShowHistory, setShowGetInvolved }: { setShow
   return (
     <nav style={{ background: "#800000", color: "#fff", padding: "20px 0", marginBottom: 32, boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", padding: "0 24px" }}>
-        <div style={{ display: "flex", alignItems: "center", marginRight: 48, cursor: "pointer" }} onClick={() => { setShowHowTo(false); setShowHistory(false); setShowGetInvolved(false); }}>
+        <div style={{ display: "flex", alignItems: "center", marginRight: 48, cursor: "pointer" }} onClick={() => { setShowHowTo(false); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(false); }}>
           <img src="/logo.png" alt="Voice for Change Logo" style={{ height: 48, marginRight: 16 }} />
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
             <span style={{ fontWeight: 800, fontSize: 28, color: "#fff", lineHeight: 1 }}>Voice for Change</span>
             <span style={{ fontSize: 14, color: "#fff", opacity: 0.7, marginTop: 2, marginLeft: 2, letterSpacing: 0.5 }}>An Open Letter Forum</span>
           </div>
         </div>
-        <a href="#howto" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(true); setShowHistory(false); setShowGetInvolved(false); }}>
+        <a href="#howto" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(true); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(false); }}>
           How to Write an Open Letter
         </a>
-        <a href="#history" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(true); setShowGetInvolved(false); }}>
+        <a href="#history" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(true); setShowGetInvolved(false); setShowDashboard(false); }}>
           Open Letters in History
         </a>
-        <a href="#getinvolved" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(false); setShowGetInvolved(true); }}>
+        <a href="#getinvolved" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(false); setShowGetInvolved(true); setShowDashboard(false); }}>
           Get Involved
+        </a>
+        <a href="#dashboard" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(true); }}>
+          Dashboard
         </a>
       </div>
     </nav>
@@ -230,10 +234,27 @@ function Footer() {
   );
 }
 
+// --- Dashboard Stats Component ---
+function DashboardStats() {
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 32, marginBottom: 40 }}>
+      <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
+        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>600+</div>
+        <div style={{ fontSize: 20, fontWeight: 600 }}>Letters Received</div>
+      </div>
+      <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
+        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>80+</div>
+        <div style={{ fontSize: 20, fontWeight: 600 }}>Replies Received</div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [showHistory, setShowHistory] = useState(false);
   const [showHowTo, setShowHowTo] = useState(false);
   const [showGetInvolved, setShowGetInvolved] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
   const [lettersSubmitted, setLettersSubmitted] = useState<
     { name: string; recipient: string; content: string }[]
   >([]);
@@ -282,7 +303,7 @@ function App() {
   if (showHistory) {
     return (
       <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
+        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
           <h1 style={{ 
             fontSize: 36, 
@@ -329,7 +350,7 @@ function App() {
   if (showHowTo) {
     return (
       <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
+        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
         <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
           <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
             Learning How to Write an Open Letter
@@ -435,7 +456,7 @@ function App() {
   if (showGetInvolved) {
     return (
       <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
+        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
         <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
           <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
@@ -481,10 +502,26 @@ function App() {
     );
   }
 
+  // --- Dashboard Page ---
+  if (showDashboard) {
+    return (
+      <div style={{ background: "#800000", minHeight: "100vh" }}>
+        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
+          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
+          <DashboardStats />
+          <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
+            🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // --- Home Page ---
   return (
     <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
-      <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} />
+      <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
           <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 24, color: "#fff", textAlign: 'center' }}>
@@ -508,6 +545,7 @@ function App() {
             </p>
           </div>
         </section>
+        <DashboardStats />
         <section id="howto" style={{ marginBottom: 40 }}>
           {/* How to Write an Open Letter section remains as before */}
         </section>
