@@ -239,11 +239,11 @@ function DashboardStats() {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 32, marginBottom: 40 }}>
       <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
-        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>600+</div>
+        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>250+</div>
         <div style={{ fontSize: 20, fontWeight: 600 }}>Letters Received</div>
       </div>
       <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
-        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>80+</div>
+        <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>20+</div>
         <div style={{ fontSize: 20, fontWeight: 600 }}>Replies Received</div>
       </div>
     </div>
