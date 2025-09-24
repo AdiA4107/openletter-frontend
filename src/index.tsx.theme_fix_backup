@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import "./index.css";
 import emailjs from 'emailjs-com';
 
@@ -215,11 +215,11 @@ function Footer() {
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.background = "#fff";
-            e.currentTarget.style.color = "#800000";
+            e.currentTarget.style.color = "#fff";
           }}
           onMouseOut={(e) => {
             e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "#800000";
+            e.currentTarget.style.color = "#fff";
           }}
         >
           leadership@openletter.co.in
@@ -300,8 +300,6 @@ function LetterForm({ onSubmit, form, setForm }: {
 // --- Home Page Component ---
 // --- Prompt Generator Component ---
 function PromptGenerator() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const navigate = useNavigate();
   const [selectedTheme, setSelectedTheme] = useState<string>("");
   const [currentPrompts, setCurrentPrompts] = useState<string[]>([]);
   const [selectedPrompt, setSelectedPrompt] = useState<string>("");
@@ -579,7 +577,7 @@ function PromptGenerator() {
               }}>
                 ✅ Great choice! Ready to write your letter?
               </p>
-              <p style={{ fontSize: 14, color: "#800000", margin: 0, marginTop: 8 }}>
+              <p style={{ fontSize: 14, color: "#2e7d32", margin: 0, marginTop: 8 }}>
                 Head to the "Get Involved" page to submit your open letter based on this prompt.
               </p>
             </div>
@@ -629,7 +627,6 @@ function HomePage() {
 function HistoryPage() {
   const [expandedExcerpts, setExpandedExcerpts] = useState<{ [key: number]: boolean }>({});
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const toggleExcerpt = (index: number) => {
     setExpandedExcerpts(prev => ({
       ...prev,
@@ -689,7 +686,7 @@ function HistoryPage() {
                   transition: "all 0.3s ease",
                   position: "relative"
                 }}
-                onClick={() => navigate("/getinvolved")}
+                onClick={() => toggleExcerpt(idx)}
                 onMouseOver={(e) => {
                   e.currentTarget.style.background = "#f0f0f0";
                   e.currentTarget.style.transform = "translateY(-1px)";
