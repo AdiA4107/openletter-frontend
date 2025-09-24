@@ -400,45 +400,39 @@ function PromptGenerator() {
 
   return (
     <div style={{ 
-      background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-      borderRadius: 20,
-      padding: 40,
+      background: "#fff", 
+      borderRadius: 16, 
+      padding: 32, 
       marginBottom: 40,
-      boxShadow: "0 8px 32px rgba(128,0,0,0.12)",
-      border: "1px solid rgba(128,0,0,0.1)"
+      boxShadow: "0 4px 6px rgba(128,0,0,0.08)",
+      border: "2px solid #800000"
     }}>
-      <div style={{ textAlign: "center", marginBottom: 32 }}>
-        <h2 style={{ 
-          fontSize: 32, 
-          fontWeight: 700, 
-          marginBottom: 16, 
-          color: "#800000",
-          background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent"
-        }}>
-          🎯 Get Inspired - Choose Your Cause
-        </h2>
-        
-        <p style={{ 
-          fontSize: 18, 
-          color: "#666", 
-          lineHeight: 1.6,
-          maxWidth: 600,
-          margin: "0 auto"
-        }}>
-          Select a theme that matters to you and we'll generate writing prompts to help you craft your open letter.
-        </p>
-      </div>
+      <h2 style={{ 
+        fontSize: 28, 
+        fontWeight: 700, 
+        marginBottom: 24, 
+        color: "#800000",
+        textAlign: "center"
+      }}>
+        🎯 Get Inspired - Choose Your Cause
+      </h2>
+      
+      <p style={{ 
+        fontSize: 16, 
+        color: "#666", 
+        marginBottom: 24, 
+        textAlign: "center",
+        lineHeight: 1.6
+      }}>
+        Select a theme that matters to you and we'll generate writing prompts to help you craft your open letter.
+      </p>
 
       {/* Theme Selection */}
       <div style={{ 
         display: "grid", 
-        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", 
-        gap: 20, 
-        marginBottom: 32,
-        maxWidth: 800,
-        margin: "0 auto 32px auto"
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
+        gap: 16, 
+        marginBottom: 24 
       }}>
         {themes.map((theme) => (
           <button
@@ -448,46 +442,34 @@ function PromptGenerator() {
               generatePrompts(theme.key);
             }}
             style={{
-              background: selectedTheme === theme.key 
-                ? "linear-gradient(135deg, #800000 0%, #a00000 100%)" 
-                : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+              background: selectedTheme === theme.key ? "#800000" : "#f8f9fa",
               color: selectedTheme === theme.key ? "#fff" : "#800000",
-              border: selectedTheme === theme.key ? "none" : "2px solid rgba(128,0,0,0.2)",
-              borderRadius: 16,
-              padding: "20px 16px",
+              border: "2px solid #800000",
+              borderRadius: 12,
+              padding: "16px 12px",
               fontSize: 16,
               fontWeight: 600,
               cursor: "pointer",
-              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "all 0.3s ease",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 12,
-              boxShadow: selectedTheme === theme.key 
-                ? "0 8px 24px rgba(128,0,0,0.25)" 
-                : "0 4px 12px rgba(128,0,0,0.08)",
-              transform: selectedTheme === theme.key ? "translateY(-2px)" : "translateY(0)"
+              gap: 8
             }}
             onMouseOver={(e) => {
               if (selectedTheme !== theme.key) {
-                e.currentTarget.style.background = "linear-gradient(135deg, #800000 0%, #a00000 100%)";
+                e.currentTarget.style.background = "#800000";
                 e.currentTarget.style.color = "#fff";
-                e.currentTarget.style.border = "none";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(128,0,0,0.25)";
               }
             }}
             onMouseOut={(e) => {
               if (selectedTheme !== theme.key) {
-                e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
+                e.currentTarget.style.background = "#f8f9fa";
                 e.currentTarget.style.color = "#800000";
-                e.currentTarget.style.border = "2px solid rgba(128,0,0,0.2)";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
               }
             }}
           >
-            <span style={{ fontSize: 28 }}>{theme.icon}</span>
+            <span style={{ fontSize: 24 }}>{theme.icon}</span>
             <span>{theme.label}</span>
           </button>
         ))}
@@ -495,88 +477,58 @@ function PromptGenerator() {
 
       {/* Generated Prompts */}
       {currentPrompts.length > 0 && (
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+        <div style={{ marginTop: 24 }}>
           <div style={{ 
             display: "flex", 
             justifyContent: "space-between", 
             alignItems: "center", 
-            marginBottom: 20 
+            marginBottom: 16 
           }}>
-            <h3 style={{ 
-              fontSize: 22, 
-              fontWeight: 600, 
-              color: "#800000",
-              margin: 0
-            }}>
+            <h3 style={{ fontSize: 20, fontWeight: 600, color: "#800000" }}>
               Choose Your Prompt:
             </h3>
             <button
               onClick={shufflePrompts}
               style={{
-                background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
+                background: "#800000",
                 color: "#fff",
                 border: "none",
-                borderRadius: 12,
-                padding: "10px 20px",
+                borderRadius: 8,
+                padding: "8px 16px",
                 fontSize: 14,
                 fontWeight: 600,
                 cursor: "pointer",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                boxShadow: "0 4px 12px rgba(128,0,0,0.2)"
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = "translateY(-1px)";
-                e.currentTarget.style.boxShadow = "0 6px 16px rgba(128,0,0,0.3)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.2)";
+                transition: "all 0.3s ease"
               }}
             >
               🔀 Shuffle
             </button>
           </div>
           
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {currentPrompts.map((prompt, index) => (
               <div
                 key={index}
                 onClick={() => selectPrompt(prompt)}
                 style={{
-                  background: selectedPrompt === prompt 
-                    ? "linear-gradient(135deg, #800000 0%, #a00000 100%)" 
-                    : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+                  background: selectedPrompt === prompt ? "#800000" : "#f8f9fa",
                   color: selectedPrompt === prompt ? "#fff" : "#800000",
-                  border: selectedPrompt === prompt 
-                    ? "none" 
-                    : "2px solid rgba(128,0,0,0.15)",
-                  borderRadius: 16,
-                  padding: 20,
+                  border: "2px solid #800000",
+                  borderRadius: 12,
+                  padding: 16,
                   cursor: "pointer",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transition: "all 0.3s ease",
                   fontSize: 15,
-                  lineHeight: 1.6,
-                  boxShadow: selectedPrompt === prompt 
-                    ? "0 8px 24px rgba(128,0,0,0.25)" 
-                    : "0 4px 12px rgba(128,0,0,0.08)",
-                  transform: selectedPrompt === prompt ? "translateY(-2px)" : "translateY(0)"
+                  lineHeight: 1.5
                 }}
                 onMouseOver={(e) => {
                   if (selectedPrompt !== prompt) {
-                    e.currentTarget.style.background = "linear-gradient(135deg, #800000 0%, #a00000 100%)";
-                    e.currentTarget.style.color = "#fff";
-                    e.currentTarget.style.border = "none";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 8px 24px rgba(128,0,0,0.25)";
+                    e.currentTarget.style.background = "#e8f4f8";
                   }
                 }}
                 onMouseOut={(e) => {
                   if (selectedPrompt !== prompt) {
-                    e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
-                    e.currentTarget.style.color = "#800000";
-                    e.currentTarget.style.border = "2px solid rgba(128,0,0,0.15)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
+                    e.currentTarget.style.background = "#f8f9fa";
                   }
                 }}
               >
@@ -587,23 +539,21 @@ function PromptGenerator() {
 
           {selectedPrompt && (
             <div style={{ 
-              marginTop: 24, 
-              padding: 20, 
-              background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", 
-              borderRadius: 16, 
-              border: "2px solid rgba(76, 175, 80, 0.3)",
-              boxShadow: "0 4px 12px rgba(76, 175, 80, 0.15)"
+              marginTop: 20, 
+              padding: 16, 
+              background: "#e8f5e8", 
+              borderRadius: 12, 
+              border: "2px solid #4caf50" 
             }}>
               <p style={{ 
                 fontSize: 16, 
                 fontWeight: 600, 
                 color: "#2e7d32", 
-                marginBottom: 8,
-                margin: 0
+                marginBottom: 8 
               }}>
                 ✅ Great choice! Ready to write your letter?
               </p>
-              <p style={{ fontSize: 14, color: "#2e7d32", margin: 0, marginTop: 8 }}>
+              <p style={{ fontSize: 14, color: "#2e7d32" }}>
                 Head to the "Get Involved" page to submit your open letter based on this prompt.
               </p>
             </div>
@@ -613,19 +563,16 @@ function PromptGenerator() {
     </div>
   );
 }
+
 // --- Home Page Component ---
 function HomePage() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
-          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 40, color: "#fff", textAlign: 'center' }}>
+          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 24, color: "#fff", textAlign: 'center' }}>
             Voice for Change: A platform where our voices can shape a better world.
           </h1>
-          
-          {/* Prompt Generator positioned right after title */}
-          <PromptGenerator />
-          
           <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
             <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               Open Letters have been utilised since the Ancient Greeks to draw the public's attention to key issues of the time. Ever since, these letters have been a driving force in representing the people's voice, a true pinnacle of democracy.
@@ -644,6 +591,9 @@ function HomePage() {
             </p>
           </div>
         </section>
+        
+        {/* Prompt Generator */}
+        <PromptGenerator />
         
         <DashboardStats />
       </main>
