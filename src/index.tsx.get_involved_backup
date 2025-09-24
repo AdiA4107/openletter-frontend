@@ -113,13 +113,13 @@ function Navigation() {
   const location = useLocation();
   
   return (
-    <nav style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", padding: "20px 0", marginBottom: 32, boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+    <nav style={{ background: "#800000", color: "#fff", padding: "20px 0", marginBottom: 32, boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", padding: "0 24px" }}>
         <Link to="/" style={{ display: "flex", alignItems: "center", marginRight: 48, textDecoration: "none" }}>
           <img src="/logo.png" alt="Voice for Change Logo" style={{ height: 48, marginRight: 16 }} />
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-            <span style={{ fontWeight: 800, fontSize: 28, color: "#2e7d32", lineHeight: 1 }}>Voice for Change</span>
-            <span style={{ fontSize: 14, color: "#2e7d32", opacity: 0.7, marginTop: 2, marginLeft: 2, letterSpacing: 0.5 }}>An Open Letter Forum</span>
+            <span style={{ fontWeight: 800, fontSize: 28, color: "#fff", lineHeight: 1 }}>Voice for Change</span>
+            <span style={{ fontSize: 14, color: "#fff", opacity: 0.7, marginTop: 2, marginLeft: 2, letterSpacing: 0.5 }}>An Open Letter Forum</span>
           </div>
         </Link>
         <Link to="/howto" style={navLinkStyle}>
@@ -189,8 +189,8 @@ function ThankYouModal({ open, onClose }: { open: boolean, onClose: () => void }
 function Footer() {
   return (
     <footer style={{
-      background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)",
-      color: "#2e7d32",
+      background: "#800000",
+      color: "#fff",
       padding: "40px 0",
       marginTop: 64,
       textAlign: "center"
@@ -203,7 +203,7 @@ function Footer() {
         <a 
           href="mailto:leadership@openletter.co.in"
           style={{
-            color: "#2e7d32",
+            color: "#fff",
             textDecoration: "none",
             fontSize: 18,
             fontWeight: 500,
@@ -256,7 +256,7 @@ function LetterForm({ onSubmit, form, setForm }: {
   };
 
   return (
-    <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#2e7d32", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
+    <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
       <input
         name="name"
         placeholder="Your Name"
@@ -290,7 +290,7 @@ function LetterForm({ onSubmit, form, setForm }: {
         required
         style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
       />
-      <button type="submit" style={{ padding: "12px 24px", background: "linear-gradient(135deg, #4caf50 0%, #66bb6a 100%)", color: "#fff", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
+      <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
         Submit Your Letter
       </button>
     </form>
@@ -502,7 +502,7 @@ function PromptGenerator() {
               onClick={shufflePrompts}
               style={{
                 background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
-                color: "#2e7d32",
+                color: "#fff",
                 border: "none",
                 borderRadius: 12,
                 padding: "10px 20px",
@@ -590,10 +590,10 @@ function PromptGenerator() {
 // --- Home Page Component ---
 function HomePage() {
   return (
-    <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", minHeight: "100vh", color: "#2e7d32" }}>
+    <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
-          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 40, color: "#2e7d32", textAlign: 'center' }}>
+          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 40, color: "#fff", textAlign: 'center' }}>
             Voice for Change: A platform where our voices can shape a better world.
           </h1>
           
@@ -601,19 +601,19 @@ function HomePage() {
           <PromptGenerator />
           
           <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-            <p style={{ fontSize: 20, color: "#2e7d32", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               Open Letters have been utilised since the Ancient Greeks to draw the public's attention to key issues of the time. Ever since, these letters have been a driving force in representing the people's voice, a true pinnacle of democracy.
             </p>
-            <p style={{ fontSize: 20, color: "#2e7d32", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               Open Letters are intended to be a letter from an ordinary citizen of the state to any high-ranking government individual, influential public figure, CEO, industry leader, or anybody in a position of power or authority. Although written by only one person, they represent the collective voice of the community that the person speaks on behalf of, including regional communities, economic groups, students, and marginalised communities, as well as victims of injustice.
             </p>
-            <p style={{ fontSize: 20, color: "#2e7d32", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               At its heart, the goal of an Open Letter is to draw public attention. It is a powerful reminder of the state operating "for the people", underscoring the effectiveness, both positively and negatively, of government policies and actions. By harnessing public opinion, they are an insurmountable force for change, based on the premise of ultimate accountability of all leaders to their people.
             </p>
-            <p style={{ fontSize: 20, color: "#2e7d32", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               This platform provides you with guidelines on how to choose what you write an Open Letter on, whom you write it to, and how you should go about the entire process. To supplement this, you can refer to Open Letters that have been extremely impactful in the change they have brought about - from Martin Luther King Jr. in the backdrop of the Civil Rights Movement, to Albert Einstein's warning issued to the US Government on the Axis Powers developing the Atomic Bomb. As a result, hopefully, each of you will leave this page more confident in your ability to use your voice for causes that matter to you.
             </p>
-            <p style={{ fontSize: 20, color: "#2e7d32", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 20, color: "#fff", marginBottom: 24, textAlign: 'center', lineHeight: 1.6 }}>
               Today, this is more important than ever. It is important to remind ourselves that our voice matters, and by utilising it effectively, we can bring change. From Education Policy to Rural Development, from Corporate Social Responsibility to Environmental Sustainability, Voice For Change aspires to use this platform to communicate received Open Letters with relevant MLAs, MPs, and Members of State and Union Governments, CEOs, and industry leaders, and it begins with your own voice. By sending in letters and engaging with policymakers and leaders across sectors, each of you plays a role in transforming the community and society around you. Get involved now.
             </p>
           </div>
@@ -640,7 +640,7 @@ function HistoryPage() {
   };
 
   return (
-    <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", minHeight: "100vh" }}>
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
         <h1 style={{ 
           fontSize: 36, 
@@ -751,9 +751,9 @@ function HowToPage() {
   };
 
   return (
-    <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", minHeight: "100vh" }}>
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#2e7d32" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
           Learning How to Write an Open Letter
         </h1>
         <div>
@@ -787,8 +787,8 @@ function HowToPage() {
             }}>
               <div style={{ display: "flex", alignItems: "center", padding: "20px 28px 0 28px" }}>
                 <span style={{
-                  background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)",
-                  color: "#2e7d32",
+                  background: "#800000",
+                  color: "#fff",
                   width: 36,
                   height: 36,
                   borderRadius: "50%",
@@ -808,7 +808,7 @@ function HowToPage() {
           ))}
         </div>
         <section id="howto-form" style={{ marginTop: 48 }}>
-          <h2 className="section-title" style={{ color: "#2e7d32", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
+          <h2 className="section-title" style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
           <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
         </section>
       </div>
@@ -846,20 +846,20 @@ function GetInvolvedPage() {
   };
 
   return (
-    <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", minHeight: "100vh" }}>
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
-        <div style={{ color: "#2e7d32", fontSize: 18, marginBottom: 24 }}>
-          <h3 style={{ color: "#2e7d32", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
+        <div style={{ color: "#fff", fontSize: 18, marginBottom: 24 }}>
+          <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
           <p style={{ marginBottom: 12 }}>
             After you submit your open letter, according to our guidelines, Voice for Change will actively work to connect you with the relevant policymaker, CEO, industry leader, or any other influential individual who can help bring about the change you sought out with your Open Letter. We are committed to championing student voices and ensuring your message reaches those who are in a position to make a difference.
           </p>
-          <h3 style={{ color: "#2e7d32", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>Why Get Involved?</h3>
+          <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>Why Get Involved?</h3>
           <p>
             By participating in Voice for Change, you can benefit from our credibility from our past engagement with policymakers, corporate leaders, and industry experts. We aspire to leverage our network to amplify your voice, ensuring each of us can enact real change across all sectors of society.
           </p>
         </div>
-        <p style={{ color: "#2e7d32", fontSize: 18, marginBottom: 16 }}>
+        <p style={{ color: "#fff", fontSize: 18, marginBottom: 16 }}>
           Ready to make your voice heard? Use the form below to submit your own open letter. Your letter will be reviewed and, if appropriate, shared with relevant policymakers and the public.
         </p>
         <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
@@ -872,9 +872,9 @@ function GetInvolvedPage() {
 // --- Dashboard Page Component ---
 function DashboardPage() {
   return (
-    <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#2e7d32" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#2e7d32", textAlign: "center" }}>Dashboard</h1>
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
         <DashboardStats />
         <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
           🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
@@ -905,7 +905,7 @@ function App() {
 
 // --- Styles ---
 const navLinkStyle: React.CSSProperties = {
-  color: "#2e7d32",
+  color: "#fff",
   textDecoration: "none",
   marginRight: 24,
   fontSize: 16,
@@ -919,7 +919,7 @@ const sectionTitleStyle: React.CSSProperties = {
   fontSize: 28,
   fontWeight: 700,
   marginBottom: 24,
-  color: "#2e7d32",
+  color: "#fff",
   position: "relative" as const,
   paddingBottom: 12
 };
@@ -927,7 +927,7 @@ const sectionTitleStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   padding: "12px 16px",
   borderRadius: 8,
-  border: "2px solid #4caf50",
+  border: "1px solid #e2e8f0",
   fontSize: 16,
   transition: "all 0.3s ease"
 };
