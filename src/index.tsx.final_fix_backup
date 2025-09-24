@@ -123,12 +123,10 @@ function Navigation() {
           </div>
         </Link>
         <Link to="/howto" style={navLinkStyle}>
-        <Link to="/" style={navLinkStyle}>
-          Home
-        </Link>
-        <Link to="/howto" style={navLinkStyle}>
           How to Write an Open Letter
         </Link>
+        <Link to="/history" style={navLinkStyle}>
+          Open Letters in History
         </Link>
         <Link to="/getinvolved" style={navLinkStyle}>
           Get Involved
@@ -235,11 +233,11 @@ function Footer() {
 function DashboardStats() {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 32, marginBottom: 40 }}>
-      <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
+      <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
         <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>250+</div>
         <div style={{ fontSize: 20, fontWeight: 600 }}>Letters Received</div>
       </div>
-      <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
+      <div style={{ background: "#fff", color: "#800000", borderRadius: 16, padding: 32, minWidth: 220, textAlign: "center", boxShadow: "0 2px 12px rgba(128,0,0,0.10)", border: "2px solid #800000" }}>
         <div style={{ fontSize: 48, fontWeight: 800, marginBottom: 8 }}>20+</div>
         <div style={{ fontSize: 20, fontWeight: 600 }}>Replies Received</div>
       </div>
@@ -292,7 +290,7 @@ function LetterForm({ onSubmit, form, setForm }: {
         required
         style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
       />
-      <button type="submit" style={{ padding: "12px 24px", background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
+      <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
         Submit Your Letter
       </button>
     </form>
@@ -416,7 +414,7 @@ function PromptGenerator() {
           fontSize: 32, 
           fontWeight: 700, 
           marginBottom: 16, 
-          color: "#2e7d32",
+          color: "#800000",
         }}>
           🎯 Get Inspired - Choose Your Cause
         </h2>
@@ -441,8 +439,8 @@ function PromptGenerator() {
             }}
             style={{
               background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-              color: "#2e7d32",
-              border: "2px solid rgba(76, 175, 80, 0.3)",
+              color: "#800000",
+              border: "2px solid rgba(128,0,0,0.2)",
               borderRadius: 16,
               padding: "20px 16px",
               fontSize: 16,
@@ -453,7 +451,7 @@ function PromptGenerator() {
               flexDirection: "column",
               alignItems: "center",
               gap: 12,
-              boxShadow: "0 4px 12px rgba(76, 175, 80, 0.15)",
+              boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
               transform: "translateY(0)"
             }}
             onMouseOver={(e) => {
@@ -485,9 +483,10 @@ function PromptGenerator() {
             <h3 style={{ 
               fontSize: 22, 
               fontWeight: 600, 
-              color: "#2e7d32",
+              color: "#800000",
               margin: 0
             }}>
+              Choose Your Prompt:
             </h3>
             <button
               onClick={shufflePrompts}
@@ -522,7 +521,7 @@ function PromptGenerator() {
                 onClick={() => selectPrompt(prompt)}
                 style={{
                   background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-                  color: "#2e7d32",
+                  color: "#800000",
                   border: "2px solid rgba(128,0,0,0.15)",
                   borderRadius: 16,
                   padding: 20,
@@ -530,7 +529,7 @@ function PromptGenerator() {
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   fontSize: 15,
                   lineHeight: 1.6,
-                  boxShadow: "0 4px 12px rgba(76, 175, 80, 0.15)",
+                  boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
                   transform: "translateY(0)"
                 }}
                 onMouseOver={(e) => {
@@ -554,10 +553,10 @@ function PromptGenerator() {
               style={{ 
                 marginTop: 24, 
                 padding: 20, 
-                background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", 
+                background: "#fff", 
                 borderRadius: 16, 
-                border: "2px solid rgba(76, 175, 80, 0.3)",
-                boxShadow: "0 4px 12px rgba(76, 175, 80, 0.15)",
+                border: "2px solid rgba(128,0,0,0.2)",
+                boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
                 cursor: "pointer",
                 transition: "all 0.3s ease"
               }}
@@ -566,13 +565,13 @@ function PromptGenerator() {
               <p style={{ 
                 fontSize: 16, 
                 fontWeight: 600, 
-                color: "#2e7d32", 
+                color: "#800000", 
                 marginBottom: 8,
                 margin: 0
               }}>
                 ✅ Great choice! Ready to write your letter?
               </p>
-              <p style={{ fontSize: 14, color: "#2e7d32", margin: 0, marginTop: 8 }}>
+              <p style={{ fontSize: 14, color: "#800000", margin: 0, marginTop: 8 }}>
                 Head to the "Get Involved" page to submit your open letter based on this prompt.
               </p>
             </div>
@@ -771,8 +770,8 @@ function HowToPage() {
             }
           ].map((step, idx) => (
             <div key={idx} style={{
-              background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)",
-              color: "#2e7d32",
+              background: "#fff",
+              color: "#800000",
               borderRadius: 16,
               boxShadow: "0 2px 12px rgba(128,0,0,0.10)",
               border: "2px solid #800000",
@@ -796,7 +795,7 @@ function HowToPage() {
                 }}>{idx + 1}</span>
                 <span style={{ fontWeight: 700, fontSize: 22 }}>{step.title}</span>
               </div>
-              <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", padding: "18px 28px 24px 28px", fontSize: 16, lineHeight: 1.6 }}>
+              <div style={{ background: "#fff", color: "#800000", padding: "18px 28px 24px 28px", fontSize: 16, lineHeight: 1.6 }}>
                 {step.content}
               </div>
             </div>
