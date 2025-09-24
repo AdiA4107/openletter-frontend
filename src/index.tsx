@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import "./index.css";
 import emailjs from 'emailjs-com';
 
@@ -66,6 +67,7 @@ function getInitials(name: string) {
     .toUpperCase();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function LetterAvatar({ image, author }: { image: string; author: string }) {
   const [imgError, setImgError] = React.useState(false);
   if (!imgError) {
@@ -105,46 +107,39 @@ function LetterAvatar({ image, author }: { image: string; author: string }) {
   );
 }
 
-// --- Shared Navigation ---
-function MainNav({ setShowHowTo, setShowHistory, setShowGetInvolved, setShowDashboard }: { setShowHowTo: (b: boolean) => void, setShowHistory: (b: boolean) => void, setShowGetInvolved: (b: boolean) => void, setShowDashboard: (b: boolean) => void }) {
-  const handleNav = (target: string) => {
-    setShowHowTo(false);
-    setShowHistory(false);
-    setShowGetInvolved(false);
-    setShowDashboard(false);
-    setTimeout(() => {
-      const el = document.getElementById(target);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+// --- Navigation Component ---
+function Navigation() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const location = useLocation();
+  
   return (
     <nav style={{ background: "#800000", color: "#fff", padding: "20px 0", marginBottom: 32, boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", padding: "0 24px" }}>
-        <div style={{ display: "flex", alignItems: "center", marginRight: 48, cursor: "pointer" }} onClick={() => { setShowHowTo(false); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(false); }}>
+        <Link to="/" style={{ display: "flex", alignItems: "center", marginRight: 48, textDecoration: "none" }}>
           <img src="/logo.png" alt="Voice for Change Logo" style={{ height: 48, marginRight: 16 }} />
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
             <span style={{ fontWeight: 800, fontSize: 28, color: "#fff", lineHeight: 1 }}>Voice for Change</span>
             <span style={{ fontSize: 14, color: "#fff", opacity: 0.7, marginTop: 2, marginLeft: 2, letterSpacing: 0.5 }}>An Open Letter Forum</span>
           </div>
-        </div>
-        <a href="#howto" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(true); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(false); }}>
+        </Link>
+        <Link to="/howto" style={navLinkStyle}>
           How to Write an Open Letter
-        </a>
-        <a href="#history" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(true); setShowGetInvolved(false); setShowDashboard(false); }}>
+        </Link>
+        <Link to="/history" style={navLinkStyle}>
           Open Letters in History
-        </a>
-        <a href="#getinvolved" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(false); setShowGetInvolved(true); setShowDashboard(false); }}>
+        </Link>
+        <Link to="/getinvolved" style={navLinkStyle}>
           Get Involved
-        </a>
-        <a href="#dashboard" className="nav-link" style={navLinkStyle} onClick={e => { e.preventDefault(); setShowHowTo(false); setShowHistory(false); setShowGetInvolved(false); setShowDashboard(true); }}>
+        </Link>
+        <Link to="/dashboard" style={navLinkStyle}>
           Dashboard
-        </a>
+        </Link>
       </div>
     </nav>
   );
 }
 
-// --- Custom Thank You Modal ---
+// --- Thank You Modal Component ---
 function ThankYouModal({ open, onClose }: { open: boolean, onClose: () => void }) {
   if (!open) return null;
   return (
@@ -161,7 +156,7 @@ function ThankYouModal({ open, onClose }: { open: boolean, onClose: () => void }
       justifyContent: 'center',
     }}>
       <div style={{
-        background: '#800000', // UChicago maroon
+        background: '#800000',
         color: '#fff',
         borderRadius: 16,
         padding: '40px 32px 32px 32px',
@@ -250,278 +245,62 @@ function DashboardStats() {
   );
 }
 
-function App() {
-  const [showHistory, setShowHistory] = useState(false);
-  const [showHowTo, setShowHowTo] = useState(false);
-  const [showGetInvolved, setShowGetInvolved] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [lettersSubmitted, setLettersSubmitted] = useState<
-    { name: string; recipient: string; content: string }[]
-  >([]);
-  const [form, setForm] = useState({
-    name: "",
-    recipient: "",
-    content: "",
-    email: ""
-  });
-  const [showThankYou, setShowThankYou] = useState(false);
-
-  // Handle form changes
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+// --- Form Component ---
+function LetterForm({ onSubmit, form, setForm }: { 
+  onSubmit: (e: React.FormEvent) => void, 
+  form: { name: string; recipient: string; content: string; email: string },
+  setForm: React.Dispatch<React.SetStateAction<{ name: string; recipient: string; content: string; email: string }>>
+}) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  return (
+    <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
+      <input
+        name="name"
+        placeholder="Your Name"
+        value={form.name}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Your Email"
+        value={form.email}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+      />
+      <input
+        name="recipient"
+        placeholder="Recipient (e.g., MLA, MP, Education Secretary, CEO, Industry Leader, etc.)"
+        value={form.recipient}
+        onChange={handleChange}
+        required
+        style={inputStyle}
+      />
+      <textarea
+        name="content"
+        placeholder="Write your open letter here..."
+        value={form.content}
+        onChange={handleChange}
+        required
+        style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
+      />
+      <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
+        Submit Your Letter
+      </button>
+    </form>
+  );
+}
 
-    emailjs.send(
-      'service_u8lrg7k', // Service ID (Outlook)
-      'template_b9xez9s', // Template ID
-      {
-        from_name: form.name,
-        recipient: form.recipient,
-        content: form.content,
-        user_email: form.email, // This will be used for CC
-      },
-      '63WjLbmftoOjaUu9U' // Public Key
-    ).then(
-      (result) => {
-        setShowThankYou(true);
-        setLettersSubmitted([{ ...form }, ...lettersSubmitted]);
-        setForm({ name: '', recipient: '', content: '', email: '' });
-      },
-      (error) => {
-        alert('There was an error sending your letter. Please try again.');
-      }
-    );
-  };
-
-  // --- History Page ---
-  if (showHistory) {
-    return (
-      <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
-          <h1 style={{ 
-            fontSize: 36, 
-            fontWeight: 800, 
-            marginBottom: 32,
-            background: "linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent"
-          }}>
-            Historically Impactful Open Letters
-          </h1>
-          <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-            gap: 24 
-          }}>
-            {letters.map((letter, idx) => (
-              <div key={idx} className="letter-card" style={{ 
-                background: WHITE,
-                padding: 24,
-                borderRadius: 16,
-                boxShadow: `0 4px 6px rgba(128,0,0,0.08)`,
-                border: `1.5px solid ${MAROON}`,
-                color: MAROON,
-                marginBottom: 8
-              }}>
-                <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: MAROON }}>{letter.title}</h2>
-                <div style={{ fontWeight: 500, marginBottom: 4 }}>By: {letter.author}</div>
-                <div style={{ fontStyle: "italic", marginBottom: 4 }}>To: {letter.recipient}</div>
-                <div style={{ marginBottom: 4 }}><b>Purpose:</b> {letter.purpose}</div>
-                <div style={{ marginBottom: 4 }}><b>Impact:</b> {letter.impact}</div>
-                <div style={{ background: "#f8f8fa", color: MAROON, borderLeft: `4px solid ${MAROON}`, padding: 12, borderRadius: 8, fontStyle: "italic", marginTop: 8 }}>
-                  <span style={{ fontWeight: 600 }}>Excerpt:</span> {letter.excerpt}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // --- How to Write an Open Letter Page ---
-  if (showHowTo) {
-    return (
-      <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
-            Learning How to Write an Open Letter
-          </h1>
-          <div>
-            {[
-              {
-                title: "Step 1: Choose a Topic and Theme",
-                content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you."
-              },
-              {
-                title: "Step 2: Choose your Leader",
-                content: "Who is currently in a position of power to hear you out, for better or for worse? It could be your local MLA, the Education Secretary for the Union, a CEO, or an industry leader. To create change, it is essential to write to someone who holds power. Note, Voice For Change operates on a student-to-policymaker basis, within India. Please focus on topics of national, regional, state, corporate, or communal importance, and represent your cause to your desired leader with conviction."
-              },
-              {
-                title: "Step 3: Write an Argumentative Essay in the Format of a Letter",
-                content: "The goal of an Open Letter, as discussed, is to draw public attention and highlight certain information. This can be in the form of recognising the Government of India's efforts to facilitate Quality Higher Education (QHE) among lower-income students through the PM Vidyalakshmi Scheme, with the goal of encouraging continuity, or acknowledging corporate initiatives in education and development. Further, this can also be in the form of recommending your own area of policy which you believe requires more attention, with suggestions on what action to take. Note, that inflammatory comments or defamation are often counterproductive in creating change."
-              },
-              {
-                title: "Step 4: Submit!",
-                content: "After confirming your Letter has a convincing cause, is addressed to an Indian Policymaker (at any scale), and most importantly - is related to an issue you deeply care about - submit it to Voice for Change and wait for us to connect with the person you wrote to and take your cause forward. All credit remains with the original writer, and Voice for Change only aspires to encourage students to channel their own narrative voice, and recognise the power they hold."
-              }
-            ].map((step, idx) => (
-              <div key={idx} style={{
-                background: "#fff",
-                color: "#800000",
-                borderRadius: 16,
-                boxShadow: "0 2px 12px rgba(128,0,0,0.10)",
-                border: "2px solid #800000",
-                marginBottom: 32,
-                padding: 0,
-                overflow: "hidden"
-              }}>
-                <div style={{ display: "flex", alignItems: "center", padding: "20px 28px 0 28px" }}>
-                  <span style={{
-                    background: "#800000",
-                    color: "#fff",
-                    width: 36,
-                    height: 36,
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    marginRight: 18
-                  }}>{idx + 1}</span>
-                  <span style={{ fontWeight: 700, fontSize: 22 }}>{step.title}</span>
-                </div>
-                <div style={{ background: "#fff", color: "#800000", padding: "18px 28px 24px 28px", fontSize: 16, lineHeight: 1.6 }}>
-                  {step.content}
-                </div>
-              </div>
-            ))}
-          </div>
-          <section id="howto-form" style={{ marginTop: 48 }}>
-            <h2 className="section-title" style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
-              <input
-                name="name"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                style={inputStyle}
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                style={inputStyle}
-              />
-              <input
-                name="recipient"
-                placeholder="Recipient (e.g., MLA, MP, Education Secretary, CEO, Industry Leader, etc.)"
-                value={form.recipient}
-                onChange={handleChange}
-                required
-                style={inputStyle}
-              />
-              <textarea
-                name="content"
-                placeholder="Write your open letter here..."
-                value={form.content}
-                onChange={handleChange}
-                required
-                style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
-              />
-              <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
-                Submit Your Letter
-              </button>
-            </form>
-          </section>
-        </div>
-      </div>
-    );
-  }
-
-  // --- Get Involved Page ---
-  if (showGetInvolved) {
-    return (
-      <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-          <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
-            <input
-              name="name"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <input
-              name="recipient"
-              placeholder="Recipient (e.g., MLA, MP, Education Secretary, CEO, Industry Leader, etc.)"
-              value={form.recipient}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <textarea
-              name="content"
-              placeholder="Write your open letter here..."
-              value={form.content}
-              onChange={handleChange}
-              required
-              style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
-            />
-            <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
-              Submit Your Letter
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  // --- Dashboard Page ---
-  if (showDashboard) {
-    return (
-      <div style={{ background: "#800000", minHeight: "100vh" }}>
-        <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
-          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
-          <DashboardStats />
-          <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
-            🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // --- Home Page ---
+// --- Home Page Component ---
+function HomePage() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", background: "#800000", minHeight: "100vh", color: "#fff" }}>
-      <MainNav setShowHowTo={setShowHowTo} setShowHistory={setShowHistory} setShowGetInvolved={setShowGetInvolved} setShowDashboard={setShowDashboard} />
       <main style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
         <section style={{ marginBottom: 40, textAlign: "center" }}>
           <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 24, color: "#fff", textAlign: 'center' }}>
@@ -546,71 +325,239 @@ function App() {
           </div>
         </section>
         <DashboardStats />
-        <section id="howto" style={{ marginBottom: 40 }}>
-          {/* How to Write an Open Letter section remains as before */}
-        </section>
-        <section id="getinvolved" style={{ marginBottom: 40 }}>
-          <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
-          <div style={{ color: "#fff", fontSize: 18, marginBottom: 24 }}>
-            <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
-            <p style={{ marginBottom: 12 }}>
-              After you submit your open letter, according to our guidelines, Voice for Change will actively work to connect you with the relevant policymaker, CEO, industry leader, or any other influential individual who can help bring about the change you sought out with your Open Letter. We are committed to championing student voices and ensuring your message reaches those who are in a position to make a difference.
-            </p>
-            <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>Why Get Involved?</h3>
-            <p>
-              By participating in Voice for Change, you can benefit from our credibility from our past engagement with policymakers, corporate leaders, and industry experts. We aspire to leverage our network to amplify your voice, ensuring each of us can enact real change across all sectors of society.
-            </p>
-          </div>
-          <p style={{ color: "#fff", fontSize: 18, marginBottom: 16 }}>
-            Ready to make your voice heard? Use the form below to submit your own open letter. Your letter will be reviewed and, if appropriate, shared with relevant policymakers and the public.
-          </p>
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#800000", padding: 32, borderRadius: 12, boxShadow: "0 4px 6px rgba(255,255,255,0.05)", color: "#fff", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
-            <input
-              name="name"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <input
-              name="recipient"
-              placeholder="Recipient (e.g., MLA, MP, Education Secretary, CEO, Industry Leader, etc.)"
-              value={form.recipient}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-            />
-            <textarea
-              name="content"
-              placeholder="Write your open letter here..."
-              value={form.content}
-              onChange={handleChange}
-              required
-              style={{ ...inputStyle, minHeight: 200, resize: "vertical" }}
-            />
-            <button type="submit" style={{ padding: "12px 24px", background: "#fff", color: "#800000", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 600, cursor: "pointer", transition: "all 0.3s ease" }}>
-              Submit Your Letter
-            </button>
-          </form>
-        </section>
       </main>
-      <Footer />
+    </div>
+  );
+}
+
+// --- History Page Component ---
+function HistoryPage() {
+  return (
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
+        <h1 style={{ 
+          fontSize: 36, 
+          fontWeight: 800, 
+          marginBottom: 32,
+          background: "linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent"
+        }}>
+          Historically Impactful Open Letters
+        </h1>
+        <div style={{ 
+          display: "grid", 
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
+          gap: 24 
+        }}>
+          {letters.map((letter, idx) => (
+            <div key={idx} className="letter-card" style={{ 
+              background: WHITE,
+              padding: 24,
+              borderRadius: 16,
+              boxShadow: `0 4px 6px rgba(128,0,0,0.08)`,
+              border: `1.5px solid ${MAROON}`,
+              color: MAROON,
+              marginBottom: 8
+            }}>
+              <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: MAROON }}>{letter.title}</h2>
+              <div style={{ fontWeight: 500, marginBottom: 4 }}>By: {letter.author}</div>
+              <div style={{ fontStyle: "italic", marginBottom: 4 }}>To: {letter.recipient}</div>
+              <div style={{ marginBottom: 4 }}><b>Purpose:</b> {letter.purpose}</div>
+              <div style={{ marginBottom: 4 }}><b>Impact:</b> {letter.impact}</div>
+              <div style={{ background: "#f8f8fa", color: MAROON, borderLeft: `4px solid ${MAROON}`, padding: 12, borderRadius: 8, fontStyle: "italic", marginTop: 8 }}>
+                <span style={{ fontWeight: 600 }}>Excerpt:</span> {letter.excerpt}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- How To Page Component ---
+function HowToPage() {
+  const [form, setForm] = useState({ name: "", recipient: "", content: "", email: "" });
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    emailjs.send(
+      'service_u8lrg7k',
+      'template_b9xez9s',
+      {
+        from_name: form.name,
+        recipient: form.recipient,
+        content: form.content,
+        user_email: form.email,
+      },
+      '63WjLbmftoOjaUu9U'
+    ).then(
+      (result) => {
+        setShowThankYou(true);
+        setForm({ name: '', recipient: '', content: '', email: '' });
+      },
+      (error) => {
+        alert('There was an error sending your letter. Please try again.');
+      }
+    );
+  };
+
+  return (
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
+        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
+          Learning How to Write an Open Letter
+        </h1>
+        <div>
+          {[
+            {
+              title: "Step 1: Choose a Topic and Theme",
+              content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you."
+            },
+            {
+              title: "Step 2: Choose your Leader",
+              content: "Who is currently in a position of power to hear you out, for better or for worse? It could be your local MLA, the Education Secretary for the Union, a CEO, or an industry leader. To create change, it is essential to write to someone who holds power. Note, Voice For Change operates on a student-to-policymaker basis, within India. Please focus on topics of national, regional, state, corporate, or communal importance, and represent your cause to your desired leader with conviction."
+            },
+            {
+              title: "Step 3: Write an Argumentative Essay in the Format of a Letter",
+              content: "The goal of an Open Letter, as discussed, is to draw public attention and highlight certain information. This can be in the form of recognising the Government of India's efforts to facilitate Quality Higher Education (QHE) among lower-income students through the PM Vidyalakshmi Scheme, with the goal of encouraging continuity, or acknowledging corporate initiatives in education and development. Further, this can also be in the form of recommending your own area of policy which you believe requires more attention, with suggestions on what action to take. Note, that inflammatory comments or defamation are often counterproductive in creating change."
+            },
+            {
+              title: "Step 4: Submit!",
+              content: "After confirming your Letter has a convincing cause, is addressed to an Indian Policymaker (at any scale), and most importantly - is related to an issue you deeply care about - submit it to Voice for Change and wait for us to connect with the person you wrote to and take your cause forward. All credit remains with the original writer, and Voice for Change only aspires to encourage students to channel their own narrative voice, and recognise the power they hold."
+            }
+          ].map((step, idx) => (
+            <div key={idx} style={{
+              background: "#fff",
+              color: "#800000",
+              borderRadius: 16,
+              boxShadow: "0 2px 12px rgba(128,0,0,0.10)",
+              border: "2px solid #800000",
+              marginBottom: 32,
+              padding: 0,
+              overflow: "hidden"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", padding: "20px 28px 0 28px" }}>
+                <span style={{
+                  background: "#800000",
+                  color: "#fff",
+                  width: 36,
+                  height: 36,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  marginRight: 18
+                }}>{idx + 1}</span>
+                <span style={{ fontWeight: 700, fontSize: 22 }}>{step.title}</span>
+              </div>
+              <div style={{ background: "#fff", color: "#800000", padding: "18px 28px 24px 28px", fontSize: 16, lineHeight: 1.6 }}>
+                {step.content}
+              </div>
+            </div>
+          ))}
+        </div>
+        <section id="howto-form" style={{ marginTop: 48 }}>
+          <h2 className="section-title" style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
+          <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
+        </section>
+      </div>
       <ThankYouModal open={showThankYou} onClose={() => setShowThankYou(false)} />
     </div>
   );
 }
 
-// Updated styles with proper TypeScript types
+// --- Get Involved Page Component ---
+function GetInvolvedPage() {
+  const [form, setForm] = useState({ name: "", recipient: "", content: "", email: "" });
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    emailjs.send(
+      'service_u8lrg7k',
+      'template_b9xez9s',
+      {
+        from_name: form.name,
+        recipient: form.recipient,
+        content: form.content,
+        user_email: form.email,
+      },
+      '63WjLbmftoOjaUu9U'
+    ).then(
+      (result) => {
+        setShowThankYou(true);
+        setForm({ name: '', recipient: '', content: '', email: '' });
+      },
+      (error) => {
+        alert('There was an error sending your letter. Please try again.');
+      }
+    );
+  };
+
+  return (
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
+        <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
+        <div style={{ color: "#fff", fontSize: 18, marginBottom: 24 }}>
+          <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
+          <p style={{ marginBottom: 12 }}>
+            After you submit your open letter, according to our guidelines, Voice for Change will actively work to connect you with the relevant policymaker, CEO, industry leader, or any other influential individual who can help bring about the change you sought out with your Open Letter. We are committed to championing student voices and ensuring your message reaches those who are in a position to make a difference.
+          </p>
+          <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>Why Get Involved?</h3>
+          <p>
+            By participating in Voice for Change, you can benefit from our credibility from our past engagement with policymakers, corporate leaders, and industry experts. We aspire to leverage our network to amplify your voice, ensuring each of us can enact real change across all sectors of society.
+          </p>
+        </div>
+        <p style={{ color: "#fff", fontSize: 18, marginBottom: 16 }}>
+          Ready to make your voice heard? Use the form below to submit your own open letter. Your letter will be reviewed and, if appropriate, shared with relevant policymakers and the public.
+        </p>
+        <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
+      </div>
+      <ThankYouModal open={showThankYou} onClose={() => setShowThankYou(false)} />
+    </div>
+  );
+}
+
+// --- Dashboard Page Component ---
+function DashboardPage() {
+  return (
+    <div style={{ background: "#800000", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
+        <DashboardStats />
+        <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
+          🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- Main App Component ---
+function App() {
+  return (
+    <Router>
+      <div style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/howto" element={<HowToPage />} />
+          <Route path="/getinvolved" element={<GetInvolvedPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+}
+
+// --- Styles ---
 const navLinkStyle: React.CSSProperties = {
   color: "#fff",
   textDecoration: "none",
@@ -622,20 +569,11 @@ const navLinkStyle: React.CSSProperties = {
   transition: "all 0.3s ease"
 };
 
-const sectionStyle: React.CSSProperties = {
-  background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-  borderRadius: 16,
-  padding: 32,
-  marginBottom: 40,
-  boxShadow: "0 4px 6px rgba(0,0,0,0.05)",
-  border: "1px solid rgba(0,0,0,0.05)"
-};
-
 const sectionTitleStyle: React.CSSProperties = {
   fontSize: 28,
   fontWeight: 700,
   marginBottom: 24,
-  color: "#1a1a1a",
+  color: "#fff",
   position: "relative" as const,
   paddingBottom: 12
 };
