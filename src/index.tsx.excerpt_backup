@@ -625,20 +625,6 @@ function HomePage() {
   );
 }
 function HistoryPage() {
-  const [expandedExcerpts, setExpandedExcerpts] = useState<{ [key: number]: boolean }>({});
-
-  const toggleExcerpt = (index: number) => {
-    setExpandedExcerpts(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
-
-  const truncateText = (text: string, maxLength: number = 200) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + "...";
-  };
-
   return (
     <div style={{ background: "#800000", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
@@ -667,54 +653,13 @@ function HistoryPage() {
               color: MAROON,
               marginBottom: 8
             }}>
-              <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: MAROON, lineHeight: 1.4 }}>{letter.title}</h2>
-              <div style={{ fontWeight: 500, marginBottom: 6, lineHeight: 1.5 }}>By: {letter.author}</div>
-              <div style={{ fontStyle: "italic", marginBottom: 6, lineHeight: 1.5 }}>To: {letter.recipient}</div>
-              <div style={{ marginBottom: 6, lineHeight: 1.6 }}><b>Purpose:</b> {letter.purpose}</div>
-              <div style={{ marginBottom: 8, lineHeight: 1.6 }}><b>Impact:</b> {letter.impact}</div>
-              <div 
-                style={{ 
-                  background: "#f8f8fa", 
-                  color: MAROON, 
-                  borderLeft: `4px solid ${MAROON}`, 
-                  padding: 16, 
-                  borderRadius: 8, 
-                  fontStyle: "italic", 
-                  marginTop: 12,
-                  lineHeight: 1.7,
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  position: "relative"
-                }}
-                onClick={() => toggleExcerpt(idx)}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = "#f0f0f0";
-                  e.currentTarget.style.transform = "translateY(-1px)";
-                  e.currentTarget.style.boxShadow = "0 2px 8px rgba(128,0,0,0.15)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = "#f8f8fa";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <span style={{ fontWeight: 600 }}>Excerpt:</span> 
-                <span style={{ marginLeft: 8 }}>
-                  {expandedExcerpts[idx] ? letter.excerpt : truncateText(letter.excerpt)}
-                </span>
-                <div style={{
-                  position: "absolute",
-                  bottom: 8,
-                  right: 12,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: "#666",
-                  background: "rgba(255,255,255,0.8)",
-                  padding: "2px 6px",
-                  borderRadius: 4
-                }}>
-                  {expandedExcerpts[idx] ? "Click to collapse" : "Click to expand"}
-                </div>
+              <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: MAROON }}>{letter.title}</h2>
+              <div style={{ fontWeight: 500, marginBottom: 4 }}>By: {letter.author}</div>
+              <div style={{ fontStyle: "italic", marginBottom: 4 }}>To: {letter.recipient}</div>
+              <div style={{ marginBottom: 4 }}><b>Purpose:</b> {letter.purpose}</div>
+              <div style={{ marginBottom: 4 }}><b>Impact:</b> {letter.impact}</div>
+              <div style={{ background: "#f8f8fa", color: MAROON, borderLeft: `4px solid ${MAROON}`, padding: 12, borderRadius: 8, fontStyle: "italic", marginTop: 8 }}>
+                <span style={{ fontWeight: 600 }}>Excerpt:</span> {letter.excerpt}
               </div>
             </div>
           ))}
@@ -723,6 +668,8 @@ function HistoryPage() {
     </div>
   );
 }
+
+// --- How To Page Component ---
 function HowToPage() {
   const [form, setForm] = useState({ name: "", recipient: "", content: "", email: "" });
   const [showThankYou, setShowThankYou] = useState(false);
