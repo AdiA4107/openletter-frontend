@@ -565,18 +565,15 @@ function PromptGenerator() {
             <div style={{ 
               marginTop: 24, 
               padding: 20, 
-              background: "#fff", 
+              background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", 
               borderRadius: 16, 
-              border: "2px solid rgba(128,0,0,0.2)",
-              boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              onClick: () => navigate("/getinvolved")
+              border: "2px solid rgba(76, 175, 80, 0.3)",
+              boxShadow: "0 4px 12px rgba(76, 175, 80, 0.15)"
             }}>
               <p style={{ 
                 fontSize: 16, 
                 fontWeight: 600, 
-                color: "#800000", 
+                color: "#2e7d32", 
                 marginBottom: 8,
                 margin: 0
               }}>
