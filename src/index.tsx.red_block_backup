@@ -422,6 +422,15 @@ function PromptGenerator() {
           🎯 Get Inspired - Choose Your Cause
         </h2>
         
+        <p style={{ 
+          fontSize: 18, 
+          color: "#666", 
+          lineHeight: 1.6,
+          maxWidth: 600,
+          margin: "0 auto"
+        }}>
+          Select a theme that matters to you and we'll generate writing prompts to help you craft your open letter.
+        </p>
       </div>
 
       {/* Theme Selection - 2x2 Grid */}
