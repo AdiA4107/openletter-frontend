@@ -562,19 +562,17 @@ function PromptGenerator() {
           </div>
 
           {selectedPrompt && (
-            <div 
-              style={{ 
-                marginTop: 24, 
-                padding: 20, 
-                background: "#fff", 
-                borderRadius: 16, 
-                border: "2px solid rgba(128,0,0,0.2)",
-                boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-              onClick={() => navigate("/getinvolved")}
-            >
+            <div style={{ 
+              marginTop: 24, 
+              padding: 20, 
+              background: "#fff", 
+              borderRadius: 16, 
+              border: "2px solid rgba(128,0,0,0.2)",
+              boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              onClick: () => navigate("/getinvolved")
+            }}>
               <p style={{ 
                 fontSize: 16, 
                 fontWeight: 600, 
