@@ -415,6 +415,9 @@ function PromptGenerator() {
           fontWeight: 700, 
           marginBottom: 16, 
           color: "#800000",
+          background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent"
         }}>
           🎯 Get Inspired - Choose Your Cause
         </h2>
@@ -491,6 +494,7 @@ function PromptGenerator() {
             <button
               onClick={shufflePrompts}
               style={{
+                background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 12,
@@ -643,6 +647,8 @@ function HistoryPage() {
           fontWeight: 800, 
           marginBottom: 32,
           background: "linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent"
         }}>
           Historically Impactful Open Letters
         </h1>
