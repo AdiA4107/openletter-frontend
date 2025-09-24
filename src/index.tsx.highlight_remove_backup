@@ -448,9 +448,11 @@ function PromptGenerator() {
               generatePrompts(theme.key);
             }}
             style={{
-              background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-              color: "#800000",
-              border: "2px solid rgba(128,0,0,0.2)",
+              background: selectedTheme === theme.key 
+                ? "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)" 
+                : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+              color: selectedTheme === theme.key ? "#fff" : "#800000",
+              border: selectedTheme === theme.key ? "none" : "2px solid rgba(128,0,0,0.2)",
               borderRadius: 16,
               padding: "20px 16px",
               fontSize: 16,
@@ -461,18 +463,28 @@ function PromptGenerator() {
               flexDirection: "column",
               alignItems: "center",
               gap: 12,
-              boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
-              transform: "translateY(0)"
+              boxShadow: selectedTheme === theme.key 
+                ? "0 8px 24px rgba(79, 70, 229, 0.25)" 
+                : "0 4px 12px rgba(128,0,0,0.08)",
+              transform: selectedTheme === theme.key ? "translateY(-2px)" : "translateY(0)"
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.background = "linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%)";
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.boxShadow = "0 6px 16px rgba(128,0,0,0.12)";
+              if (selectedTheme !== theme.key) {
+                e.currentTarget.style.background = "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)";
+                e.currentTarget.style.color = "#fff";
+                e.currentTarget.style.border = "none";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(79, 70, 229, 0.25)";
+              }
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
+              if (selectedTheme !== theme.key) {
+                e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
+                e.currentTarget.style.color = "#800000";
+                e.currentTarget.style.border = "2px solid rgba(128,0,0,0.2)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
+              }
             }}
           >
             <span style={{ fontSize: 28 }}>{theme.icon}</span>
@@ -501,7 +513,7 @@ function PromptGenerator() {
             <button
               onClick={shufflePrompts}
               style={{
-                background: "linear-gradient(135deg, #800000 0%, #a00000 100%)",
+                background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
                 color: "#fff",
                 border: "none",
                 borderRadius: 12,
@@ -510,15 +522,15 @@ function PromptGenerator() {
                 fontWeight: 600,
                 cursor: "pointer",
                 transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                boxShadow: "0 4px 12px rgba(128,0,0,0.2)"
+                boxShadow: "0 4px 12px rgba(79, 70, 229, 0.2)"
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = "translateY(-1px)";
-                e.currentTarget.style.boxShadow = "0 6px 16px rgba(128,0,0,0.3)";
+                e.currentTarget.style.boxShadow = "0 6px 16px rgba(79, 70, 229, 0.3)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.2)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(79, 70, 229, 0.2)";
               }}
             >
               🔀 Shuffle
@@ -531,27 +543,41 @@ function PromptGenerator() {
                 key={index}
                 onClick={() => selectPrompt(prompt)}
                 style={{
-                  background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
-                  color: "#800000",
-                  border: "2px solid rgba(128,0,0,0.15)",
+                  background: selectedPrompt === prompt 
+                    ? "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)" 
+                    : "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)",
+                  color: selectedPrompt === prompt ? "#fff" : "#800000",
+                  border: selectedPrompt === prompt 
+                    ? "none" 
+                    : "2px solid rgba(128,0,0,0.15)",
                   borderRadius: 16,
                   padding: 20,
                   cursor: "pointer",
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   fontSize: 15,
                   lineHeight: 1.6,
-                  boxShadow: "0 4px 12px rgba(128,0,0,0.08)",
-                  transform: "translateY(0)"
+                  boxShadow: selectedPrompt === prompt 
+                    ? "0 8px 24px rgba(79, 70, 229, 0.25)" 
+                    : "0 4px 12px rgba(128,0,0,0.08)",
+                  transform: selectedPrompt === prompt ? "translateY(-2px)" : "translateY(0)"
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = "linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%)";
-                  e.currentTarget.style.transform = "translateY(-1px)";
-                  e.currentTarget.style.boxShadow = "0 6px 16px rgba(128,0,0,0.12)";
+                  if (selectedPrompt !== prompt) {
+                    e.currentTarget.style.background = "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)";
+                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.border = "none";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow = "0 8px 24px rgba(79, 70, 229, 0.25)";
+                  }
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
+                  if (selectedPrompt !== prompt) {
+                    e.currentTarget.style.background = "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)";
+                    e.currentTarget.style.color = "#800000";
+                    e.currentTarget.style.border = "2px solid rgba(128,0,0,0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
+                  }
                 }}
               >
                 <strong>Option {index + 1}:</strong> {prompt}
