@@ -134,7 +134,7 @@ function Navigation() {
           Get Involved
         </Link>
         <Link to="/dashboard" style={navLinkStyle}>
-          Impact Dashboard
+          Dashboard
         </Link>
       </div>
     </nav>
@@ -418,7 +418,7 @@ function PromptGenerator() {
           marginBottom: 16, 
           color: "#2e7d32",
         }}>
-          Choose your Cause
+          🎯 Get Inspired - Choose Your Cause
         </h2>
         
       </div>
@@ -791,7 +791,7 @@ function HowToPage() {
             {[
               {
                 title: "Step 1: Choose a Topic and Theme",
-                content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you. If you are looking for inspiration, check out our sample questions on education, climate, social justice or economic inequality!"
+                content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you."
               },
               {
                 title: "Step 2: Choose your Leader",
