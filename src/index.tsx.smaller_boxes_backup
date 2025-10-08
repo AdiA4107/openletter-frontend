@@ -427,10 +427,10 @@ function PromptGenerator() {
       <div style={{ 
         display: "grid", 
         gridTemplateColumns: "1fr 1fr", 
-        gap: 16, 
-        marginBottom: 24,
+        gap: 20, 
+        marginBottom: 32,
         maxWidth: 600,
-        margin: "0 auto 24px auto"
+        margin: "0 auto 32px auto"
       }}>
         {themes.map((theme) => (
           <button
@@ -460,7 +460,7 @@ function PromptGenerator() {
               gap: 0,
               boxShadow: "0 4px 12px rgba(128, 0, 0, 0.15)",
               transform: "translateY(0)",
-              minHeight: "140px",
+              minHeight: "200px",
               position: "relative",
               overflow: "hidden"
             }}
@@ -487,11 +487,11 @@ function PromptGenerator() {
             }}>
               <span style={{
                 color: "#fff",
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: 700,
                 textAlign: "center",
                 textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
-                padding: "12px"
+                padding: "16px"
               }}>
                 {theme.label}
               </span>
