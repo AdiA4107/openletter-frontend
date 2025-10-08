@@ -376,10 +376,10 @@ function PromptGenerator() {
   };
 
   const themes = [
-    { key: "education", label: "Education", icon: "/education-theme.svg" },
-    { key: "climate", label: "Climate & Environment", icon: "/climate-theme.svg" },
-    { key: "socialJustice", label: "Social Justice", icon: "/social-justice-theme.svg" },
-    { key: "economics", label: "Economics & Inequality", icon: "/economics-theme.svg" }
+    { key: "education", label: "Education", icon: "/education-theme.jpg" },
+    { key: "climate", label: "Climate & Environment", icon: "/climate-theme.jpg" },
+    { key: "socialJustice", label: "Social Justice", icon: "/social-justice-theme.jpg" },
+    { key: "economics", label: "Economics & Inequality", icon: "/economics-theme.jpg" }
   ];
 
   const generatePrompts = (theme: string) => {
