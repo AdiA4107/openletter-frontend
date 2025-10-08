@@ -1003,37 +1003,6 @@ function DashboardPage() {
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>FROM:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Suprina T.</div>
-                </div>
-              </div>
-              <div style={{ 
-                fontSize: 16, 
-                lineHeight: 1.6, 
-                color: "#333",
-                background: "#f8f9fa",
-                padding: 16,
-                borderRadius: 12,
-                border: "1px solid rgba(128,0,0,0.05)"
-              }}>
-                <strong>Summary:</strong> Being a strong leader doesn't mean shutting off your emotions. It means having the courage to care. Empathy is not a weakness. It is one of the greatest strengths a leader can have. The world doesn't just need smart leaders. It needs human ones.
-              </div>
-            </div>
-
-            {/* Letter 4 */}
-            <div style={{ 
-              background: "#fff", 
-              borderRadius: 16, 
-              padding: 24, 
-              border: "2px solid rgba(128,0,0,0.1)",
-              boxShadow: "0 4px 12px rgba(128,0,0,0.08)"
-            }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <div>
-                  <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>TO:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>CEO of Flipkart</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>FROM:</div>
                   <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Praghyaan B.</div>
                 </div>
               </div>
