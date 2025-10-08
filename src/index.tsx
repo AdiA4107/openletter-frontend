@@ -376,10 +376,10 @@ function PromptGenerator() {
   };
 
   const themes = [
-    { key: "education", label: "Education", icon: "/education-theme.jpg" },
-    { key: "climate", label: "Climate & Environment", icon: "/climate-theme.jpg" },
-    { key: "socialJustice", label: "Social Justice", icon: "/social-justice-theme.jpg" },
-    { key: "economics", label: "Economics & Inequality", icon: "/economics-theme.jpg" }
+    { key: "education", label: "Education", icon: `${process.env.PUBLIC_URL}/education-theme.jpg` },
+    { key: "climate", label: "Climate & Environment", icon: `${process.env.PUBLIC_URL}/climate-theme.jpg` },
+    { key: "socialJustice", label: "Social Justice", icon: `${process.env.PUBLIC_URL}/social-justice-theme.jpg` },
+    { key: "economics", label: "Economics & Inequality", icon: `${process.env.PUBLIC_URL}/economics-theme.jpg` }
   ];
 
   const generatePrompts = (theme: string) => {
@@ -440,10 +440,6 @@ function PromptGenerator() {
               generatePrompts(theme.key);
             }}
             style={{
-              backgroundImage: `url("${theme.icon}")`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
               backgroundColor: "#800000",
               color: "#fff",
               border: "2px solid rgba(128, 0, 0, 0.3)",
@@ -473,6 +469,19 @@ function PromptGenerator() {
               e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.15)";
             }}
           >
+            <img 
+              src={theme.icon} 
+              alt={theme.label}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: 16
+              }}
+            />
             <div style={{
               position: "absolute",
               top: 0,
@@ -663,32 +672,32 @@ function HistoryPage() {
     return text.substring(0, maxLength) + "...";
   };
 
-  return (
-    <div style={{ background: "#800000", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
-        <h1 style={{ 
-          fontSize: 36, 
-          fontWeight: 800, 
-          marginBottom: 32,
-          background: "linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%)",
-        }}>
-          Historically Impactful Open Letters
-        </h1>
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-          gap: 24 
-        }}>
-          {letters.map((letter, idx) => (
-            <div key={idx} className="letter-card" style={{ 
-              background: WHITE,
-              padding: 24,
-              borderRadius: 16,
-              boxShadow: `0 4px 6px rgba(128,0,0,0.08)`,
-              border: `1.5px solid ${MAROON}`,
-              color: MAROON,
-              marginBottom: 8
-            }}>
+    return (
+      <div style={{ background: "#800000", minHeight: "100vh" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: 24 }}>
+          <h1 style={{ 
+            fontSize: 36, 
+            fontWeight: 800, 
+            marginBottom: 32,
+            background: "linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%)",
+          }}>
+            Historically Impactful Open Letters
+          </h1>
+          <div style={{ 
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
+            gap: 24 
+          }}>
+            {letters.map((letter, idx) => (
+              <div key={idx} className="letter-card" style={{ 
+                background: WHITE,
+                padding: 24,
+                borderRadius: 16,
+                boxShadow: `0 4px 6px rgba(128,0,0,0.08)`,
+                border: `1.5px solid ${MAROON}`,
+                color: MAROON,
+                marginBottom: 8
+              }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, color: MAROON, lineHeight: 1.4 }}>{letter.title}</h2>
               <div style={{ fontWeight: 500, marginBottom: 6, lineHeight: 1.5 }}>By: {letter.author}</div>
               <div style={{ fontStyle: "italic", marginBottom: 6, lineHeight: 1.5 }}>To: {letter.recipient}</div>
@@ -737,14 +746,14 @@ function HistoryPage() {
                 }}>
                   {expandedExcerpts[idx] ? "Click to collapse" : "Click to expand"}
                 </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 function HowToPage() {
   const [form, setForm] = useState({ name: "", recipient: "", content: "", email: "" });
   const [showThankYou, setShowThankYou] = useState(false);
@@ -772,72 +781,72 @@ function HowToPage() {
     );
   };
 
-  return (
-    <div style={{ background: "#800000", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
-          Learning How to Write an Open Letter
-        </h1>
-        <div>
-          {[
-            {
-              title: "Step 1: Choose a Topic and Theme",
-              content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you."
-            },
-            {
-              title: "Step 2: Choose your Leader",
-              content: "Who is currently in a position of power to hear you out, for better or for worse? It could be your local MLA, the Education Secretary for the Union, a CEO, or an industry leader. To create change, it is essential to write to someone who holds power. Note, Voice For Change operates on a student-to-policymaker basis, within India. Please focus on topics of national, regional, state, corporate, or communal importance, and represent your cause to your desired leader with conviction."
-            },
-            {
-              title: "Step 3: Write an Argumentative Essay in the Format of a Letter",
-              content: "The goal of an Open Letter, as discussed, is to draw public attention and highlight certain information. This can be in the form of recognising the Government of India's efforts to facilitate Quality Higher Education (QHE) among lower-income students through the PM Vidyalakshmi Scheme, with the goal of encouraging continuity, or acknowledging corporate initiatives in education and development. Further, this can also be in the form of recommending your own area of policy which you believe requires more attention, with suggestions on what action to take. Note, that inflammatory comments or defamation are often counterproductive in creating change."
-            },
-            {
-              title: "Step 4: Submit!",
-              content: "After confirming your Letter has a convincing cause, is addressed to an Indian Policymaker (at any scale), and most importantly - is related to an issue you deeply care about - submit it to Voice for Change and wait for us to connect with the person you wrote to and take your cause forward. All credit remains with the original writer, and Voice for Change only aspires to encourage students to channel their own narrative voice, and recognise the power they hold."
-            }
-          ].map((step, idx) => (
-            <div key={idx} style={{
+    return (
+      <div style={{ background: "#800000", minHeight: "100vh" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
+          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff" }}>
+            Learning How to Write an Open Letter
+          </h1>
+          <div>
+            {[
+              {
+                title: "Step 1: Choose a Topic and Theme",
+                content: "As is required for any essay, your Open Letter must have a topic and theme. What caused you to write this letter in the first place? From Education Policy, Rural Development, Climate Change, or Economic Policy - each of us have our own causes that we feel strongly about, to write a powerful and meaningful letter, choose the idea that is most important to you."
+              },
+              {
+                title: "Step 2: Choose your Leader",
+                content: "Who is currently in a position of power to hear you out, for better or for worse? It could be your local MLA, the Education Secretary for the Union, a CEO, or an industry leader. To create change, it is essential to write to someone who holds power. Note, Voice For Change operates on a student-to-policymaker basis, within India. Please focus on topics of national, regional, state, corporate, or communal importance, and represent your cause to your desired leader with conviction."
+              },
+              {
+                title: "Step 3: Write an Argumentative Essay in the Format of a Letter",
+                content: "The goal of an Open Letter, as discussed, is to draw public attention and highlight certain information. This can be in the form of recognising the Government of India's efforts to facilitate Quality Higher Education (QHE) among lower-income students through the PM Vidyalakshmi Scheme, with the goal of encouraging continuity, or acknowledging corporate initiatives in education and development. Further, this can also be in the form of recommending your own area of policy which you believe requires more attention, with suggestions on what action to take. Note, that inflammatory comments or defamation are often counterproductive in creating change."
+              },
+              {
+                title: "Step 4: Submit!",
+                content: "After confirming your Letter has a convincing cause, is addressed to an Indian Policymaker (at any scale), and most importantly - is related to an issue you deeply care about - submit it to Voice for Change and wait for us to connect with the person you wrote to and take your cause forward. All credit remains with the original writer, and Voice for Change only aspires to encourage students to channel their own narrative voice, and recognise the power they hold."
+              }
+            ].map((step, idx) => (
+              <div key={idx} style={{
               background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)",
               color: "#2e7d32",
-              borderRadius: 16,
-              boxShadow: "0 2px 12px rgba(128,0,0,0.10)",
-              border: "2px solid #800000",
-              marginBottom: 32,
-              padding: 0,
-              overflow: "hidden"
-            }}>
-              <div style={{ display: "flex", alignItems: "center", padding: "20px 28px 0 28px" }}>
-                <span style={{
-                  background: "#800000",
-                  color: "#fff",
-                  width: 36,
-                  height: 36,
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 18,
-                  fontWeight: 700,
-                  marginRight: 18
-                }}>{idx + 1}</span>
-                <span style={{ fontWeight: 700, fontSize: 22 }}>{step.title}</span>
-              </div>
+                borderRadius: 16,
+                boxShadow: "0 2px 12px rgba(128,0,0,0.10)",
+                border: "2px solid #800000",
+                marginBottom: 32,
+                padding: 0,
+                overflow: "hidden"
+              }}>
+                <div style={{ display: "flex", alignItems: "center", padding: "20px 28px 0 28px" }}>
+                  <span style={{
+                    background: "#800000",
+                    color: "#fff",
+                    width: 36,
+                    height: 36,
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    marginRight: 18
+                  }}>{idx + 1}</span>
+                  <span style={{ fontWeight: 700, fontSize: 22 }}>{step.title}</span>
+                </div>
               <div style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)", color: "#2e7d32", padding: "18px 28px 24px 28px", fontSize: 16, lineHeight: 1.6 }}>
-                {step.content}
+                  {step.content}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <section id="howto-form" style={{ marginTop: 48 }}>
-          <h2 className="section-title" style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
+            ))}
+          </div>
+          <section id="howto-form" style={{ marginTop: 48 }}>
+            <h2 className="section-title" style={{ color: "#fff", fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Submit Your Own Open Letter</h2>
           <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
-        </section>
-      </div>
+          </section>
+        </div>
       <ThankYouModal open={showThankYou} onClose={() => setShowThankYou(false)} />
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
 // --- Get Involved Page Component ---
 function GetInvolvedPage() {
@@ -867,10 +876,10 @@ function GetInvolvedPage() {
     );
   };
 
-  return (
-    <div style={{ background: "#800000", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-        <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
+    return (
+      <div style={{ background: "#800000", minHeight: "100vh" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
+          <h2 className="section-title" style={sectionTitleStyle}>Get Involved - Write Your Own Open Letter</h2>
         <div style={{ color: "#fff", fontSize: 18, marginBottom: 24 }}>
           <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "16px 0 8px 0" }}>How This Works</h3>
           <p style={{ marginBottom: 12 }}>
@@ -887,17 +896,17 @@ function GetInvolvedPage() {
         <LetterForm onSubmit={handleSubmit} form={form} setForm={setForm} />
       </div>
       <ThankYouModal open={showThankYou} onClose={() => setShowThankYou(false)} />
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
 // --- Dashboard Page Component ---
 function DashboardPage() {
-  return (
-    <div style={{ background: "#800000", minHeight: "100vh" }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
-        <DashboardStats />
+    return (
+      <div style={{ background: "#800000", minHeight: "100vh" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: 24, color: "#fff" }}>
+          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 32, color: "#fff", textAlign: "center" }}>Dashboard</h1>
+          <DashboardStats />
         <div style={{ 
           background: "linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%)", 
           borderRadius: 20, 
@@ -1011,13 +1020,13 @@ function DashboardPage() {
             </div>
           </div>
         </div>
-        <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
-          🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
+          <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
+            🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 // --- Main App Component ---
 function App() {
@@ -1032,8 +1041,8 @@ function App() {
           <Route path="/getinvolved" element={<GetInvolvedPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
-        <Footer />
-      </div>
+      <Footer />
+    </div>
     </Router>
   );
 }
