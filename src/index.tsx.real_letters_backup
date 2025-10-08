@@ -901,11 +901,11 @@ function DashboardPage() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>TO:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Prime Minister Modi</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>The Mayor of Chicago</div>
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>FROM:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Aarushi R.</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Sarah M., Community Organizer</div>
                 </div>
               </div>
               <div style={{ 
@@ -917,7 +917,7 @@ function DashboardPage() {
                 borderRadius: 12,
                 border: "1px solid rgba(128,0,0,0.05)"
               }}>
-                <strong>Summary:</strong> Sir, we the youth of India, are ready to work hard, compete fairly, and contribute meaningfully to the nation. All we ask for is a level playing field. Reforming the reservation system to include lower-income earners is about ensuring that support reaches the right hands, and that no deserving student is left behind.
+                <strong>Summary:</strong> A passionate plea for increased funding for public transportation, highlighting how unreliable bus service disproportionately affects low-income communities and students. The letter includes specific data about route delays and proposes a community-driven solution for better transit equity.
               </div>
             </div>
 
@@ -932,11 +932,11 @@ function DashboardPage() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>TO:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>The City of Mumbai</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>University Board of Trustees</div>
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>FROM:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Lineysha B.</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Alex Chen, Student</div>
                 </div>
               </div>
               <div style={{ 
@@ -948,7 +948,7 @@ function DashboardPage() {
                 borderRadius: 12,
                 border: "1px solid rgba(128,0,0,0.05)"
               }}>
-                <strong>Summary:</strong> Why are there so many cautions when a girl is growing up? We've become so accustomed to feeling uncomfortable, unsafe, or unheard that we've begun to accept it as "normal". It isn't and it shouldn't be, either. I want to be intelligent without coming across as "too ambitious." When I'm just leaving for school or returning home, I want to feel safe, not brave.
+                <strong>Summary:</strong> A compelling argument for divesting from fossil fuel companies, backed by student research and climate science. The letter outlines the university's current investments and proposes a timeline for transition to sustainable alternatives, emphasizing the institution's responsibility to future generations.
               </div>
             </div>
 
@@ -963,11 +963,11 @@ function DashboardPage() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>TO:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Leaders of India</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Local School District</div>
                 </div>
                 <div style={{ textAlign: "right" }}>
                   <div style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>FROM:</div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Suprina T.</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "#800000" }}>Maria Rodriguez, Parent</div>
                 </div>
               </div>
               <div style={{ 
@@ -979,7 +979,7 @@ function DashboardPage() {
                 borderRadius: 12,
                 border: "1px solid rgba(128,0,0,0.05)"
               }}>
-                <strong>Summary:</strong> Being a strong leader doesn't mean shutting off your emotions. It means having the courage to care. Empathy is not a weakness. It is one of the greatest strengths a leader can have. The world doesn't just need smart leaders. It needs human ones.
+                <strong>Summary:</strong> A heartfelt request for comprehensive mental health support in schools, sharing personal experiences of students struggling with anxiety and depression. The letter advocates for trained counselors, peer support programs, and destigmatization of mental health discussions in educational settings.
               </div>
             </div>
           </div>
