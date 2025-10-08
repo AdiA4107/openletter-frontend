@@ -376,10 +376,10 @@ function PromptGenerator() {
   };
 
   const themes = [
-    { key: "education", label: "Education", icon: "/education-theme.svg" },
-    { key: "climate", label: "Climate & Environment", icon: "/climate-theme.svg" },
-    { key: "socialJustice", label: "Social Justice", icon: "/social-justice-theme.svg" },
-    { key: "economics", label: "Economics & Inequality", icon: "/economics-theme.svg" }
+    { key: "education", label: "Education", icon: "📚" },
+    { key: "climate", label: "Climate & Environment", icon: "🌱" },
+    { key: "socialJustice", label: "Social Justice", icon: "⚖️" },
+    { key: "economics", label: "Economics & Inequality", icon: "💰" }
   ];
 
   const generatePrompts = (theme: string) => {
@@ -467,16 +467,7 @@ function PromptGenerator() {
               e.currentTarget.style.boxShadow = "0 4px 12px rgba(128,0,0,0.08)";
             }}
           >
-            <img 
-              src={theme.icon} 
-              alt={theme.label}
-              style={{ 
-                width: 48, 
-                height: 48, 
-                objectFit: "contain",
-                borderRadius: 8
-              }}
-            />
+            <span style={{ fontSize: 28 }}>{theme.icon}</span>
             <span>{theme.label}</span>
           </button>
         ))}
