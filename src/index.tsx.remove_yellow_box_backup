@@ -1051,6 +1051,9 @@ function DashboardPage() {
             </div>
           </div>
         </div>
+          <div style={{ background: "#fff3cd", color: "#856404", borderRadius: 12, padding: 24, fontSize: 20, fontWeight: 600, textAlign: "center", border: "2px solid #ffeeba" }}>
+            🚀 <span>Impact page coming soon! Stay tuned for stories of real change.</span>
+          </div>
         </div>
       </div>
     );
